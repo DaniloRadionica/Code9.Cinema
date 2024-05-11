@@ -1,4 +1,6 @@
+using Code9.Domain.Handlers;
 using Code9.Domain.Interfaces;
+using Code9.Domain.Queries;
 using Code9.Infrastructure;
 using Code9.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,8 @@ builder.Services.AddDbContext<CinemaDbContext>(options =>
     options.UseInMemoryDatabase("Cinemas"));
 
 builder.Services.AddScoped<ICinemaRepository, CinemaRepository>();
+
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(GetAllCinemaQuery).Assembly));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
